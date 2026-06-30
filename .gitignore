@@ -1,0 +1,27 @@
+Byte-compiled / optimized / DLL files
+
+pycache/
+*.py[cod]
+*$py.class
+
+Environments
+
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+qkd_gcn/
+miniconda3/
+
+VS Code specific
+
+.vscode/
+
+PyTorch/Data
+
+*.pt
+*.pth
+data/
