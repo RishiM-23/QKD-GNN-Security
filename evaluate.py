@@ -208,20 +208,21 @@ def main(telemetry_csv="sequence_telemetry_output.csv",
 
     # Reproduce the same 80/20 train/val split as gcn_train.py
     _, val_graphs = train_test_split(graphs, test_size=0.2, random_state=42)
-    n_total = len(graphs)
-    n_val   = len(val_graphs)
-    # Match the val rows in the flat dataframe
-    all_idx = list(range(n_total))
-    _, val_idx = train_test_split(all_idx, test_size=0.2, random_state=42)
-    val_rows = []
-    for i in sorted(val_idx):
-        val_rows.append(df.iloc[i * EDGES_PER_GRAPH:(i + 1) * EDGES_PER_GRAPH])
-    val_df = pd.concat(val_rows).reset_index(drop=True)
 
-    labels     = val_df["Attacked_Flag"].values
-    qbers      = val_df["QBER"].values
-    signals    = val_df["Signal_Count"].values
-    key_losses = val_df["Key_Loss"].values
+    # Pull labels and features directly from val_graphs — same order as gcn_predict.
+    # Previously used sorted(val_idx) to build val_df, which was in a different
+    # order than train_test_split's shuffled val_graphs → predictions vs labels
+    # were misaligned, causing near-random GCN results despite high training F1.
+    labels     = torch.cat([g.y            for g in val_graphs]).numpy()
+    qbers      = torch.cat([g.qber         for g in val_graphs]).numpy()
+    signals    = torch.cat([g.signal_count for g in val_graphs]).numpy()
+    key_losses = torch.cat([g.key_loss     for g in val_graphs]).numpy()
+
+    # val_df for threshold baseline — built in same shuffled order as val_graphs
+    _, val_idx = train_test_split(list(range(len(graphs))), test_size=0.2, random_state=42)
+    val_df = pd.concat(
+        [df.iloc[i * EDGES_PER_GRAPH:(i + 1) * EDGES_PER_GRAPH] for i in val_idx]
+    ).reset_index(drop=True)
 
     summary = {}
 
