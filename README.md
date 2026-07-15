@@ -35,13 +35,11 @@ python train.py
 **<small><small># 3. Evaluate F1-scores against baseline thresholds<small><small>**
 
 python evaluate.py
-
-
-
-
+<br>
+<br>
 (Note: Check best_hparams.json and eval_summary.json for the latest evaluation metrics).
-
-
+<br>
+<br>
 
 👨‍💻 **Team (CCBD Summer Internship)**
 
