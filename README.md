@@ -1,5 +1,5 @@
-🌌 QKD-GNN: Quantum Key Distribution Attack Localization
-
+🌌 **QKD-GNN: Quantum Key Distribution Attack Localization
+**
 A machine learning pipeline using Edge-Centric Graph Neural Networks to detect and pinpoint physical-layer attacks (Intercept-Resend, Blinding) in QKD networks.
 
 🎯 Overview
