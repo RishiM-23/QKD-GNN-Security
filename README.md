@@ -24,18 +24,19 @@ pip install torch torch_geometric pandas
 
 2. **Run the Pipeline**
 
-# 1. Generate graph topologies (requires C++ compiler)
+<small><small># 1. Generate graph topologies (requires C++ compiler)<small><small>
 ./parser.exe 
 
-# 2. Train the Edge-Centric model
+<small><small># 2. Train the Edge-Centric model<small><small>
 python train.py
 
-# 3. Evaluate F1-scores against baseline thresholds
+<small><small># 3. Evaluate F1-scores against baseline thresholds<small><small>
 python evaluate.py
 
 
 
 (Note: Check best_hparams.json and eval_summary.json for the latest evaluation metrics).
+
 
 👨‍💻 **Team (CCBD Summer Internship)**
 
